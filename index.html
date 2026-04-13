@@ -506,7 +506,7 @@
             <p class="wedding-location">Caracas, Venezuela</p>
 
             <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: #B8967A; margin-top: 8px; margin-bottom: 8px; line-height: 1.6;">
-                Tu confirmacion incluye a tu acompañante,<br>en caso de tenerlo
+                Tu confirmación incluye a tu acompañante,<br>en caso de tenerlo
             </p>
 
             <div class="divider" style="margin-bottom: 25px;"></div>
@@ -525,12 +525,12 @@
                     <label>Asistencia</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="si" name="asistencia" value="Si, asistire" required>
+                            <input type="radio" id="si" name="asistencia" value="Sí, asistiré" required>
                             <label for="si">Con mucho gusto</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="no" name="asistencia" value="No podre asistir">
-                            <label for="no">No podre asistir</label>
+                            <input type="radio" id="no" name="asistencia" value="No podré asistir">
+                            <label for="no">No podré asistir</label>
                         </div>
                     </div>
                 </div>
@@ -549,7 +549,7 @@
                 <span class="heart">&#10084;</span>
                 <p id="thankYouMessage">
                     Tu respuesta ha sido registrada.<br>
-                    Ariadna & Diego agradecen tu confirmacion.
+                    Ariadna & Diego agradecen tu confirmación.
                 </p>
             </div>
         </div>
@@ -605,9 +605,9 @@
             form.classList.add('hidden');
             thankYou.classList.add('active');
 
-            if (asistencia === 'Si, asistire') {
+            if (asistencia === 'Sí, asistiré') {
                 thankYouMsg.innerHTML = `
-                    <strong>${nombre}</strong>, tu asistencia ha sido confirmada.<br><br>
+                    <strong>${nombre}</strong>, tu asistencia ha sido confirmada..<br><br>
                     Ariadna & Diego se alegran de contar contigo<br>
                     el <strong>17 de octubre de 2026</strong>.<br><br>
                     <span style="font-size: 0.9rem; opacity: 0.7;">Nos vemos en Caracas</span>
@@ -616,7 +616,7 @@
                 thankYouMsg.innerHTML = `
                     <strong>${nombre}</strong>, lamentamos que no puedas asistir.<br><br>
                     Ariadna & Diego agradecen tu respuesta<br>
-                    y te llevan en el corazon.
+                    y te llevan en el corazón.
                 `;
             }
         });
