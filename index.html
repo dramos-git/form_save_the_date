@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Date - Ariadna & Diego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: #FFF0ED;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floral corner decorations */
+        .floral-corner {
+            position: fixed;
+            width: 220px;
+            height: 220px;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        .floral-top-left {
+            top: -10px;
+            left: -10px;
+        }
+
+        .floral-top-right {
+            top: -10px;
+            right: -10px;
+            transform: scaleX(-1);
+        }
+
+        .floral-bottom-left {
+            bottom: -10px;
+            left: -10px;
+            transform: scaleY(-1);
+        }
+
+        .floral-bottom-right {
+            bottom: -10px;
+            right: -10px;
+            transform: scale(-1, -1);
+        }
+
+        /* SVG Floral decoration */
+        .floral-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px rgba(180, 120, 120, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        .save-the {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #8B6F5E;
+            margin-bottom: -5px;
+        }
+
+        .date-script {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #C4926E;
+            margin-bottom: 5px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C4926E, transparent);
+            margin: 15px auto;
+        }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.6rem;
+            color: #8B6F5E;
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+
+        .couple-names .ampersand {
+            font-size: 2rem;
+            color: #C4926E;
+            display: block;
+            margin: -5px 0;
+        }
+
+        .wedding-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #8B6F5E;
+            letter-spacing: 3px;
+            margin-top: 10px;
+        }
+
+        .wedding-location {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #B8967A;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+
+        .rsvp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #8B6F5E;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .rsvp-title::before,
+        .rsvp-title::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: #C4926E;
+            vertical-align: middle;
+            margin: 0 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #8B6F5E;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E8D5CC;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: #6B5344;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #C4926E;
+            box-shadow: 0 0 12px rgba(196, 146, 110, 0.15);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 20px;
+            border: 1.5px solid #E8D5CC;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #8B6F5E;
+            background: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .radio-option input[type="radio"]:checked + label {
+            background: linear-gradient(135deg, #C4926E, #D4A88C);
+            color: #fff;
+            border-color: #C4926E;
+            box-shadow: 0 4px 15px rgba(196, 146, 110, 0.3);
+        }
+
+        .radio-option label:hover {
+            border-color: #C4926E;
+            background: rgba(196, 146, 110, 0.08);
+        }
+
+        .radio-option input[type="radio"]:checked + label:hover {
+            background: linear-gradient(135deg, #B8845F, #C4926E);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #C4926E, #D4A88C);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(196, 146, 110, 0.25);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(196, 146, 110, 0.4);
+            background: linear-gradient(135deg, #B8845F, #C4926E);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Thank you state */
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .thank-you.active {
+            display: block;
+        }
+
+        .thank-you h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #C4926E;
+            margin-bottom: 15px;
+        }
+
+        .thank-you p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: #8B6F5E;
+            line-height: 1.7;
+        }
+
+        .thank-you .heart {
+            font-size: 2rem;
+            margin: 15px 0;
+            display: block;
+        }
+
+        #rsvpForm.hidden {
+            display: none;
+        }
+
+        /* Vine decorations on sides */
+        .vine-left, .vine-right {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 300px;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .vine-left { left: 10px; }
+        .vine-right { right: 10px; transform: translateY(-50%) scaleX(-1); }
+
+        /* Small flower accents */
+        .flower-accent {
+            display: inline-block;
+            color: #E8A0B4;
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .form-group {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.3s; }
+        .form-group:nth-child(3) { animation-delay: 0.4s; }
+        .form-group:nth-child(4) { animation-delay: 0.5s; }
+
+        @media (max-width: 560px) {
+            .card {
+                padding: 35px 25px;
+            }
+
+            .couple-names {
+                font-size: 2.2rem;
+            }
+
+            .date-script {
+                font-size: 2.2rem;
+            }
+
+            .floral-corner {
+                width: 140px;
+                height: 140px;
+            }
+
+            .rsvp-title::before,
+            .rsvp-title::after {
+                width: 20px;
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floral corner SVGs -->
+    <div class="floral-corner floral-top-left">
+        <svg class="floral-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Main branch -->
+            <path d="M0,80 Q40,70 70,50 Q90,35 100,10" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <path d="M0,100 Q50,90 90,60 Q110,45 120,15" fill="none" stroke="#8BAF7C" stroke-width="1.2" opacity="0.6"/>
+            <path d="M80,0 Q70,40 50,60 Q35,75 10,85" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+
+            <!-- Leaves -->
+            <ellipse cx="55" cy="55" rx="12" ry="6" fill="#8BAF7C" opacity="0.5" transform="rotate(-40,55,55)"/>
+            <ellipse cx="75" cy="35" rx="10" ry="5" fill="#9BBF8C" opacity="0.4" transform="rotate(-50,75,35)"/>
+            <ellipse cx="40" cy="72" rx="11" ry="5" fill="#7A9E6B" opacity="0.45" transform="rotate(-30,40,72)"/>
+            <ellipse cx="90" cy="22" rx="8" ry="4" fill="#8BAF7C" opacity="0.4" transform="rotate(-55,90,22)"/>
+            <ellipse cx="25" cy="82" rx="10" ry="5" fill="#9BBF8C" opacity="0.35" transform="rotate(-20,25,82)"/>
+
+            <!-- Pink flowers -->
+            <circle cx="30" cy="40" r="10" fill="#F4A0B0" opacity="0.7"/>
+            <circle cx="25" cy="35" r="8" fill="#F8B8C4" opacity="0.6"/>
+            <circle cx="35" cy="35" r="8" fill="#F0909F" opacity="0.5"/>
+            <circle cx="30" cy="40" r="4" fill="#FFDDE4" opacity="0.8"/>
+
+            <circle cx="70" cy="15" r="7" fill="#F4A0B0" opacity="0.6"/>
+            <circle cx="67" cy="12" r="5.5" fill="#F8B8C4" opacity="0.5"/>
+            <circle cx="73" cy="12" r="5.5" fill="#F0909F" opacity="0.45"/>
+            <circle cx="70" cy="15" r="3" fill="#FFDDE4" opacity="0.7"/>
+
+            <!-- Orange small flowers -->
+            <circle cx="85" cy="48" r="5" fill="#F0C090" opacity="0.6"/>
+            <circle cx="85" cy="48" r="2.5" fill="#FFE0B8" opacity="0.7"/>
+
+            <circle cx="15" cy="65" r="6" fill="#EDB88C" opacity="0.5"/>
+            <circle cx="15" cy="65" r="3" fill="#FFE0C0" opacity="0.6"/>
+
+            <!-- Tiny buds -->
+            <circle cx="100" cy="8" r="3" fill="#F4A0B0" opacity="0.4"/>
+            <circle cx="50" cy="25" r="3.5" fill="#EDB88C" opacity="0.45"/>
+            <circle cx="8" cy="90" r="4" fill="#F8B8C4" opacity="0.35"/>
+
+            <!-- Delicate vine tendrils -->
+            <path d="M95,55 Q105,50 108,40" fill="none" stroke="#B8967A" stroke-width="0.8" opacity="0.3"/>
+            <path d="M55,85 Q50,95 42,98" fill="none" stroke="#B8967A" stroke-width="0.8" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <div class="floral-corner floral-top-right">
+        <svg class="floral-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,80 Q40,70 70,50 Q90,35 100,10" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <path d="M0,100 Q50,90 90,60 Q110,45 120,15" fill="none" stroke="#8BAF7C" stroke-width="1.2" opacity="0.6"/>
+            <path d="M80,0 Q70,40 50,60 Q35,75 10,85" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <ellipse cx="55" cy="55" rx="12" ry="6" fill="#8BAF7C" opacity="0.5" transform="rotate(-40,55,55)"/>
+            <ellipse cx="75" cy="35" rx="10" ry="5" fill="#9BBF8C" opacity="0.4" transform="rotate(-50,75,35)"/>
+            <ellipse cx="40" cy="72" rx="11" ry="5" fill="#7A9E6B" opacity="0.45" transform="rotate(-30,40,72)"/>
+            <ellipse cx="90" cy="22" rx="8" ry="4" fill="#8BAF7C" opacity="0.4" transform="rotate(-55,90,22)"/>
+            <circle cx="30" cy="40" r="10" fill="#F4A0B0" opacity="0.7"/>
+            <circle cx="25" cy="35" r="8" fill="#F8B8C4" opacity="0.6"/>
+            <circle cx="35" cy="35" r="8" fill="#F0909F" opacity="0.5"/>
+            <circle cx="30" cy="40" r="4" fill="#FFDDE4" opacity="0.8"/>
+            <circle cx="70" cy="15" r="7" fill="#F4A0B0" opacity="0.6"/>
+            <circle cx="67" cy="12" r="5.5" fill="#F8B8C4" opacity="0.5"/>
+            <circle cx="73" cy="12" r="5.5" fill="#F0909F" opacity="0.45"/>
+            <circle cx="70" cy="15" r="3" fill="#FFDDE4" opacity="0.7"/>
+            <circle cx="85" cy="48" r="5" fill="#F0C090" opacity="0.6"/>
+            <circle cx="85" cy="48" r="2.5" fill="#FFE0B8" opacity="0.7"/>
+            <circle cx="15" cy="65" r="6" fill="#EDB88C" opacity="0.5"/>
+            <circle cx="15" cy="65" r="3" fill="#FFE0C0" opacity="0.6"/>
+            <circle cx="100" cy="8" r="3" fill="#F4A0B0" opacity="0.4"/>
+            <circle cx="50" cy="25" r="3.5" fill="#EDB88C" opacity="0.45"/>
+            <path d="M95,55 Q105,50 108,40" fill="none" stroke="#B8967A" stroke-width="0.8" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <div class="floral-corner floral-bottom-left">
+        <svg class="floral-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,80 Q40,70 70,50 Q90,35 100,10" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <path d="M80,0 Q70,40 50,60 Q35,75 10,85" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <ellipse cx="55" cy="55" rx="12" ry="6" fill="#8BAF7C" opacity="0.5" transform="rotate(-40,55,55)"/>
+            <ellipse cx="75" cy="35" rx="10" ry="5" fill="#9BBF8C" opacity="0.4" transform="rotate(-50,75,35)"/>
+            <circle cx="30" cy="40" r="10" fill="#F4A0B0" opacity="0.7"/>
+            <circle cx="25" cy="35" r="8" fill="#F8B8C4" opacity="0.6"/>
+            <circle cx="35" cy="35" r="8" fill="#F0909F" opacity="0.5"/>
+            <circle cx="30" cy="40" r="4" fill="#FFDDE4" opacity="0.8"/>
+            <circle cx="70" cy="15" r="7" fill="#EDB88C" opacity="0.5"/>
+            <circle cx="70" cy="15" r="3.5" fill="#FFE0C0" opacity="0.6"/>
+            <path d="M55,85 Q50,95 42,98" fill="none" stroke="#B8967A" stroke-width="0.8" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <div class="floral-corner floral-bottom-right">
+        <svg class="floral-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,80 Q40,70 70,50 Q90,35 100,10" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <path d="M80,0 Q70,40 50,60 Q35,75 10,85" fill="none" stroke="#7A9E6B" stroke-width="1.5" opacity="0.7"/>
+            <ellipse cx="55" cy="55" rx="12" ry="6" fill="#8BAF7C" opacity="0.5" transform="rotate(-40,55,55)"/>
+            <ellipse cx="75" cy="35" rx="10" ry="5" fill="#9BBF8C" opacity="0.4" transform="rotate(-50,75,35)"/>
+            <circle cx="30" cy="40" r="10" fill="#F4A0B0" opacity="0.7"/>
+            <circle cx="25" cy="35" r="8" fill="#F8B8C4" opacity="0.6"/>
+            <circle cx="35" cy="35" r="8" fill="#F0909F" opacity="0.5"/>
+            <circle cx="30" cy="40" r="4" fill="#FFDDE4" opacity="0.8"/>
+            <circle cx="70" cy="15" r="7" fill="#EDB88C" opacity="0.5"/>
+            <circle cx="70" cy="15" r="3.5" fill="#FFE0C0" opacity="0.6"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <!-- Header -->
+            <p class="save-the">Save the</p>
+            <p class="date-script">Date</p>
+
+            <div class="divider"></div>
+
+            <div class="couple-names">
+                Ariadna
+                <span class="ampersand">&</span>
+                Diego
+            </div>
+
+            <p class="wedding-date">17 . 10 . 2026</p>
+            <p class="wedding-location">Caracas, Venezuela</p>
+
+            <div class="divider" style="margin-bottom: 25px;"></div>
+
+            <!-- RSVP Title -->
+            <p class="rsvp-title">Confirmar</p>
+
+            <!-- Form -->
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label>Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Tu nombre y apellido" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Asistencia</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="si" name="asistencia" value="Si, asistire" required>
+                            <label for="si">Con mucho gusto</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="no" name="asistencia" value="No podre asistir">
+                            <label for="no">No podre asistir</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Mensaje para los novios <span style="font-weight:300; opacity:0.7;">(opcional)</span></label>
+                    <textarea id="mensaje" placeholder="Escribe unas palabras para Ariadna & Diego..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Confirmar Asistencia</button>
+            </form>
+
+            <!-- Thank you message -->
+            <div class="thank-you" id="thankYou">
+                <h2>Gracias</h2>
+                <span class="heart">&#10084;</span>
+                <p id="thankYouMessage">
+                    Tu respuesta ha sido registrada.<br>
+                    Ariadna & Diego agradecen tu confirmacion.
+                </p>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top: 20px; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #C4926E; opacity: 0.6;">
+            A & D &mdash; 17.10.2026
+        </p>
+    </div>
+
+    <script>
+        const form = document.getElementById('rsvpForm');
+        const thankYou = document.getElementById('thankYou');
+        const thankYouMsg = document.getElementById('thankYouMessage');
+        const submitBtn = form.querySelector('.submit-btn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombre').value.trim();
+            const asistencia = document.querySelector('input[name="asistencia"]:checked')?.value;
+            const mensaje = document.getElementById('mensaje').value.trim();
+
+            // Deshabilitar boton mientras envia
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+
+            // ============================================================
+            // GOOGLE SHEETS INTEGRATION
+            // Reemplaza esta URL con tu Google Apps Script Web App URL
+            // (ver instrucciones abajo en este archivo)
+            // ============================================================
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzOTLcG5MMhgpWWw7Gwp1HXuNy14ScPc9cNBxwnQev5epN5sdOeeR3Gg2jtfsP9pUfa/exec';
+
+            if (GOOGLE_SCRIPT_URL) {
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            nombre,
+                            asistencia,
+                            mensaje,
+                            fecha: new Date().toLocaleString('es-VE')
+                        })
+                    });
+                } catch (err) {
+                    console.log('Error enviando datos:', err);
+                }
+            }
+
+            // Mostrar agradecimiento
+            form.classList.add('hidden');
+            thankYou.classList.add('active');
+
+            if (asistencia === 'Si, asistire') {
+                thankYouMsg.innerHTML = `
+                    <strong>${nombre}</strong>, tu asistencia ha sido confirmada.<br><br>
+                    Ariadna & Diego se alegran de contar contigo<br>
+                    el <strong>17 de octubre de 2026</strong>.<br><br>
+                    <span style="font-size: 0.9rem; opacity: 0.7;">Nos vemos en Caracas</span>
+                `;
+            } else {
+                thankYouMsg.innerHTML = `
+                    <strong>${nombre}</strong>, lamentamos que no puedas asistir.<br><br>
+                    Ariadna & Diego agradecen tu respuesta<br>
+                    y te llevan en el corazon.
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
